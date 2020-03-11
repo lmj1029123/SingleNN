@@ -1,5 +1,37 @@
-# SingleNN
+* SingleNN
+
+This repository is part of the supporting information for SingleNN. 
+
+The dataset can be download from figshare. 
 
 
-The dataset can be download from figshare.
+** Train/val/test
+
+To do the train/val/test split. You should do:
+
+#+BEGIN_SRC sh
+python split.py
+#+END_SRC
+
+
+
+** combine
+
+To combine dataset of different elements, we can choose which datasets to combine in combine.py and then it can also be run with:
+
+#+BEGIN_SRC sh
+python combine.py
+#+END_SRC
+
+
+
+** Training
+
+
+To do the training or transfer learning, hyperparameters can be changed in the main.py. To run it, simply use:
+
+#+BEGIN_SRC sh
+python main.py
+#+END_SRC
+
 
