@@ -15,7 +15,7 @@ python split.py
 
 
 
-** combine
+** Combine
 
 To combine dataset of different elements, we can choose which datasets to combine in combine.py and then it can also be run with:
 
@@ -35,3 +35,17 @@ python main.py
 #+END_SRC
 
 
+
+** Parity/metrics
+
+To get the detailed error break-down for each element in the combine set, use:
+
+#+BEGIN_SRC sh
+python parity_plus.py
+#+END_SRC
+
+To simply get the parity plots, use:
+
+#+BEGIN_SRC sh
+python parity.py
+#+END_SRC
