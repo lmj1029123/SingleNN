@@ -94,9 +94,12 @@ hp = {'n_nodes': n_nodes, 'activations': activations, 'lr': lr}
 In this block, we set the is_train = True. Therefore, we are doing the full training. What follows are the hyperparameters for the SingleNN.  
 
 
-* Training
+* Full training
 
 ** Configuration
+
+This will set the fingerprint configurations for the training. It will first construct a new directory for the experiment you are running. In this block, you will specify the database you are using, the elements in the database. You will need to set the weighting schemes for different elements if you are using the weighted symmetry functions. Symmetry functions G22 and G24 corresponds to the weighted version of G2 and G4 symmetry functions.
+
 #+BEGIN_SRC ipython
 if is_train:
     # The Name of the training
@@ -115,7 +118,7 @@ if is_train:
     # you can set it to None
     #elements = ['Li', 'Si', 'Ni', 'Cu', 'Ge', 'Mo']
     #element_energy = torch.tensor([-1.90,-10.84/2,-5.51,-3.72,-8.95/2,-10.96])
-    element_energy = torch.tensor([-3,72])
+    element_energy = torch.tensor([-3.72])
     # Atomic number 
     #weights = [3, 14, 28, 29, 32, 42]
     # Allen electronegativity
@@ -146,9 +149,11 @@ if is_train:
 # Out [3]: 
 :end:
 
-This will set the fingerprint configurations for the training. 
 
-** training  
+
+** Training  
+
+You don't need to modify this code block. It will just run the training of the SingleNN.
 
 #+BEGIN_SRC ipython
 if is_train:
@@ -242,6 +247,8 @@ is_transfer = True
 
 ** Configuration
 
+In this block, you need to specify where the pretrained model is from. Then you need to specify the weights for the elements if you are using weighted symmetry functions.
+
 #+BEGIN_SRC ipython
 if is_transfer:
     source_Name = 'Cu_e'
@@ -281,6 +288,8 @@ if is_transfer:
 :end:
 
 ** transfer
+
+You don't need to modify this. It will just run the codes for transfer learning. 
 
 #+BEGIN_SRC ipython
 if is_transfer:
