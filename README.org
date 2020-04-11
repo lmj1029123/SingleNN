@@ -1,51 +1,15 @@
 * SingleNN
 
-This repository is part of the supporting information for SingleNN. 
+To use this package, please make sure you have PyTorch, NumPy and C++ compiler install.
 
-The dataset can be download from figshare. 
-
-
-** Train/val/test
-
-To do the train/val/test split. You should do:
+The codes are included in the src directory and tutorial.org shows an example using this package. Before using the package, make sure enter the SimpleNN directory and run
 
 #+BEGIN_SRC sh
-python split.py
+python libsymf_builder.py
 #+END_SRC
 
-
-
-** Combine
-
-To combine dataset of different elements, we can choose which datasets to combine in combine.py and then it can also be run with:
-
-#+BEGIN_SRC sh
-python combine.py
-#+END_SRC
+This will build a Python-C++ interface that uses the codes from SimpleNN to generate fingerprints.
 
 
 
-** Training
-
-
-To do the training or transfer learning, hyperparameters can be changed in the main.py. To run it, simply use:
-
-#+BEGIN_SRC sh
-python main.py
-#+END_SRC
-
-
-
-** Parity/metrics
-
-To get the detailed error break-down for each element in the combine set, use:
-
-#+BEGIN_SRC sh
-python parity_plus.py
-#+END_SRC
-
-To simply get the parity plots, use:
-
-#+BEGIN_SRC sh
-python parity.py
-#+END_SRC
+K. Lee, D. Yoo, W. Jeong, S. Han, SIMPLE-NN: An efficient package for training and executing neural-network interatomic potentials, Computer Physics Communications (2019), https://doi.org/10.1016/j.cpc.2019.04.014.

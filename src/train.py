@@ -4,8 +4,7 @@ from torch.autograd import grad
 from Batch import batch_pad
 import sys
 import time
-
-def train(train_dict, val_dict, model, SSE, SAE, opt_method, optimizer, mini_batch, batch_size, E_coeff, F_coeff, epoch, val_interval, n_val_stop, convergence, is_force, logfile):
+def train(train_dict, val_dict, model, SSE, SAE, opt_method, optimizer, E_coeff, F_coeff, epoch, val_interval, n_val_stop, convergence, is_force, logfile):
 
     t0 = time.time()
     model_path = 'best_model'
@@ -20,30 +19,28 @@ def train(train_dict, val_dict, model, SSE, SAE, opt_method, optimizer, mini_bat
     E_cov = convergence['E_cov']
     F_cov = convergence['F_cov']
 
-    if mini_batch == False:
-        t_ids = np.array(list(train_dict.keys()))
-        batch_info = batch_pad(train_dict,t_ids)
-        b_fp = batch_info['b_fp']
-
-        if is_force:
-            b_dfpdX = batch_info['b_dfpdX'].view(b_fp.shape[0],
-                                                 b_fp.shape[1]*b_fp.shape[2],
-                                                 b_fp.shape[1]*3)
-        b_e_mask = batch_info['b_e_mask']
-        b_fp.requires_grad = True
-        sb_fp = (b_fp - gmin) / (gmax - gmin)
-        N_atoms = batch_info['N_atoms'].view(-1)
-        b_e = batch_info['b_e'].view(-1)
-        b_f = batch_info['b_f'] 
+    t_ids = np.array(list(train_dict.keys()))
+    batch_info = batch_pad(train_dict,t_ids)
+    b_fp = batch_info['b_fp']
+    
+    if is_force:
+        b_dfpdX = batch_info['b_dfpdX'].view(b_fp.shape[0],
+                                             b_fp.shape[1]*b_fp.shape[2],
+                                             b_fp.shape[1]*3)
+    b_e_mask = batch_info['b_e_mask']
+    b_fp.requires_grad = True
+    sb_fp = (b_fp - gmin) / (gmax - gmin)
+    N_atoms = batch_info['N_atoms'].view(-1)
+    b_e = batch_info['b_e'].view(-1)
+    b_f = batch_info['b_f'] 
 
     
-  
-        sb_e = (b_e - emin) / (emax - emin)
-        sb_f = b_f / (emax - emin) 
-        t1 = time.time()
-        logfile.write(f'Batching takes {t1-t0}.\n')
     
-    # Validation set is not mini batched
+    sb_e = (b_e - emin) / (emax - emin)
+    sb_f = b_f / (emax - emin) 
+    t1 = time.time()
+    logfile.write(f'Batching takes {t1-t0}.\n')
+    
     v_ids = np.array(list(val_dict.keys()))
     v_batch_info = batch_pad(val_dict,v_ids)
     v_b_fp = v_batch_info['b_fp']
@@ -65,9 +62,6 @@ def train(train_dict, val_dict, model, SSE, SAE, opt_method, optimizer, mini_bat
 
 
     if opt_method == 'lbfgs':
-        if mini_batch:
-            sys.exit(f'No mini_batch in lbfgs.')
-            
         for i in range(epoch):
             def closure():
                 global E_MAE, F_MAE
@@ -152,8 +146,6 @@ def train(train_dict, val_dict, model, SSE, SAE, opt_method, optimizer, mini_bat
                 logfile.flush()
                 if n_val > n_val_stop:
                     break
-
-   
 
     t2 = time.time()
     logfile.write(f'Training takes {t2-t0}\n')
