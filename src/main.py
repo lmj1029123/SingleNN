@@ -132,12 +132,6 @@ if is_transfer:
     # you can set it to None
     element_energy = torch.tensor([-1.90060294,-10.84460345/2,-5.51410074,-3.71807396,-8.94730881/2,-10.96382467])
 
-    # elements = ['Mo']
-    # nelem = len(elements)
-    # # This is the energy of the metal in its ground state structure
-    # #if you don't know the energy of the ground state structure,
-    # # you can set it to None
-    # element_energy = torch.tensor([-10.96382467])
 
     # Atomic number 
     #weights = [3, 14, 28, 29, 32, 42]
