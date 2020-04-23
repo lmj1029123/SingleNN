@@ -211,23 +211,7 @@ if is_train:
             resultfile.close()
 #+END_SRC
 
-#+RESULTS:
-:results:
-# Out [4]: 
-# output
-preprocess done
-train_test_split done
-final train_val_split done
-/Users/mingjieliu/anaconda3/lib/python3.7/site-packages/torch/serialization.py:292: UserWarning: Couldn't retrieve source code for container of type MultiLayerNet. It won't be checked for correctness upon loading.
-  "type " + obj.__name__ + ". It won't be checked "
-/Users/mingjieliu/anaconda3/lib/python3.7/site-packages/torch/serialization.py:292: UserWarning: Couldn't retrieve source code for container of type Sequential. It won't be checked for correctness upon loading.
-  "type " + obj.__name__ + ". It won't be checked "
-/Users/mingjieliu/anaconda3/lib/python3.7/site-packages/torch/serialization.py:292: UserWarning: Couldn't retrieve source code for container of type Linear. It won't be checked for correctness upon loading.
-  "type " + obj.__name__ + ". It won't be checked "
-/Users/mingjieliu/anaconda3/lib/python3.7/site-packages/torch/serialization.py:292: UserWarning: Couldn't retrieve source code for container of type Tanh. It won't be checked for correctness upon loading.
-  "type " + obj.__name__ + ". It won't be checked "
 
-:end:
 
 
 * Transfer learning
