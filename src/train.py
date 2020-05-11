@@ -4,9 +4,11 @@ from torch.autograd import grad
 from Batch import batch_pad
 import sys
 import time
-def train(train_dict, val_dict, model, SSE, SAE, opt_method, optimizer, E_coeff, F_coeff, epoch, val_interval, n_val_stop, convergence, is_force, logfile):
+def train(train_dict, val_dict, model, opt_method, optimizer, E_coeff, F_coeff, epoch, val_interval, n_val_stop, convergence, is_force, logfile):
 
     t0 = time.time()
+    SSE = torch.nn.MSELoss(reduction='sum')
+    SAE = torch.nn.L1Loss(reduction='sum')
     model_path = 'best_model'
     scaling = model.scaling
     gmin = scaling['gmin']
@@ -190,8 +192,9 @@ def get_metrics(sb_e, sb_f, N_atoms, ids, E_predict, F_predict, SSE, SAE, scalin
     return [E_loss, F_loss, E_MAE, F_MAE, E_RMSE, F_RMSE]
 
 
-def evaluate(data_dict, SSE, SAE, E_coeff, F_coeff, is_force):
-
+def evaluate(data_dict, E_coeff, F_coeff, is_force):
+    SSE = torch.nn.MSELoss(reduction='sum')
+    SAE = torch.nn.L1Loss(reduction='sum')
     model = torch.load('best_model')
     scaling = model.scaling
     gmin = scaling['gmin']

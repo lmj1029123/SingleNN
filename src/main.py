@@ -103,7 +103,7 @@ if is_train:
     g4_etas=[0.01]
     g4_zetas=[1.0, 4.0]
     g4_lambdas=[-1.0, 1.0]
-    sym_params = [Gs, cutoff, g2_etas, g2_Rses, g4_etas, g4_zetas, g4_lambdas]
+    sym_params = [Gs, cutoff, g2_etas, g2_Rses, g4_etas, g4_zetas, g4_lambdas, elements, weights, element_energy]
     params_set = set_sym(elements, Gs, cutoff,
                          g2_etas=g2_etas, g2_Rses=g2_Rses,
                          g4_etas=g4_etas, g4_zetas = g4_zetas,
@@ -213,7 +213,8 @@ if is_transfer:
         with cd(source_Name+f'-{seed}'):
             model = torch.load('best_model')
             sym_params = pickle.load(open( "sym_params.sav", "rb" ))
-            [Gs, cutoff, g2_etas, g2_Rses, g4_etas, g4_zetas, g4_lambdas]=sym_params
+            [Gs, cutoff, g2_etas, g2_Rses, g4_etas, g4_zetas, g4_lambdas, _, _, _]=sym_params
+            sym_params = [Gs, cutoff, g2_etas, g2_Rses, g4_etas, g4_zetas, g4_lambdas, elements, weights, element_energy]
             params_set = set_sym(elements, Gs, cutoff,
                          g2_etas=g2_etas, g2_Rses=g2_Rses,
                          g4_etas=g4_etas, g4_zetas = g4_zetas,
@@ -221,9 +222,10 @@ if is_transfer:
    
             N_sym = params_set[elements[0]]['num']
         with cd(Name+f'-{seed}'):
-            
+            pickle.dump(sym_params, open("sym_params.sav", "wb"))
             logfile = open('log.txt','w+')
             resultfile = open('result.txt','w+')
+            
             
             if os.path.exists('test.sav'):
                 logfile.write('Did not calculate symfunctions.\n')

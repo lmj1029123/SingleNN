@@ -1,0 +1,16 @@
+* SingleNN
+
+To use this package, please make sure you have PyTorch, NumPy and C++ compiler installed.
+
+The codes are included in the src directory and tutorial.org shows an example using this package. Before using the package, make sure to enter the SimpleNN directory and run
+
+#+BEGIN_SRC sh
+python libsymf_builder.py
+#+END_SRC
+
+This will build a Python-C++ interface that uses the codes from SIMPLE-NN to generate fingerprints.
+
+
+
+A. Lee, D. Yoo, W. Jeong, S. Han, SIMPLE-NN: An efficient package for training and executing neural-network interatomic potentials, Computer Physics Communications (2019), https://doi.org/10.1016/j.cpc.2019.04.014.
+ 
