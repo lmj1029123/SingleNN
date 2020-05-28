@@ -182,7 +182,7 @@ if is_train:
                                               line_search_fn=line_search_fn)
              
             results = train(train_dict, val_dict,
-                            model, SSE, SAE,
+                            model,
                             opt_method, optimizer,
                             E_coeff, F_coeff,
                             epoch, val_interval,
@@ -191,7 +191,7 @@ if is_train:
                             logfile)
             [loss, E_MAE, F_MAE, v_loss, v_E_MAE, v_F_MAE] = results
             
-            test_results = evaluate(test_dict, SSE, SAE, E_coeff, F_coeff, is_force)
+            test_results = evaluate(test_dict, E_coeff, F_coeff, is_force)
             [test_loss, test_E_MAE, test_F_MAE] =test_results
             resultfile.write(f'Hyperparameter: n_nodes = {n_nodes}, activations = {activations}, lr = {lr}\n')
             resultfile.write(f'loss = {loss}, E_MAE = {E_MAE}, F_MAE = {F_MAE}.\n')
@@ -258,7 +258,7 @@ if is_transfer:
                                               line_search_fn=line_search_fn)
              
             results = train(train_dict, val_dict,
-                            model, SSE, SAE,
+                            model,
                             opt_method, optimizer,
                             E_coeff, F_coeff,
                             epoch, val_interval,
@@ -267,7 +267,7 @@ if is_transfer:
                             logfile)
             [loss, E_MAE, F_MAE, v_loss, v_E_MAE, v_F_MAE] = results
             
-            test_results = evaluate(test_dict, SSE, SAE, E_coeff, F_coeff, is_force)
+            test_results = evaluate(test_dict, E_coeff, F_coeff, is_force)
             [test_loss, test_E_MAE, test_F_MAE] =test_results
             resultfile.write(f'Hyperparameter: n_nodes = {n_nodes}, activations = {activations}, lr = {lr}\n')
             resultfile.write(f'loss = {loss}, E_MAE = {E_MAE}, F_MAE = {F_MAE}.\n')
